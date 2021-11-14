@@ -11,26 +11,12 @@ function App() {
 
   return (
     <>
-      <Router>
+     
         <Navbar />
-        <Routes>
-          <Route exact path="" element={<Login />}></Route>
-          <Route path="admin" element={<Admin />} exact></Route>
-          <Route path="adminprofile" element={<AdminProfile />} exact></Route>
-          <Route path="agents" element={<Agents />} exact></Route>
-          <Route element={<ErrorPage />} exact></Route>
-        </Routes>
-      </Router>
-      {/* <BrowserRouter>
-        <Routes>
-          <Route path="/" component={Login} exact></Route>
-          <Route path="/admin" component={Admin} exact></Route>
-          <Route path="/adminprofile" component={AdminProfile} exact></Route>
-          <Route path="/agents" component={Agents} exact></Route>
-          <Route component={ErrorPage} exact></Route>
-        </Routes>
-
-      </BrowserRouter> */}
+          <Route exact path="/" component={Login}></Route>
+          <Route exact path="/admin" component={Admin}></Route>
+          <Route exact path="/adminprofile" component={AdminProfile}></Route>
+          <Route exact path="/agents" component={Agents}></Route>
     </>
   );
 }

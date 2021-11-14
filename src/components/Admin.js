@@ -4,7 +4,8 @@ import { AudioOutlined, SearchOutlined } from '@ant-design/icons';
 import { Table, Tag } from 'antd';
 import { Pagination } from 'antd';
 import { NavLink } from 'react-router-dom'
-
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { Radio } from 'antd';
 const Admin = () => {
     const { Search } = Input;
@@ -113,13 +114,6 @@ const Admin = () => {
             </Space>
             <br />
             <br />
-            <h5>Customer Collection List</h5>
-            <Radio.Group onChange={onChange} defaultValue="a">
-                <Radio.Button value="a">Today</Radio.Button>
-                <Radio.Button value="b">This week</Radio.Button>
-                <Radio.Button value="c">This month</Radio.Button>
-            </Radio.Group>
-
             <Table dataSource={dataSource} columns={columns} />;
             <Pagination defaultCurrent={1} total={50} />
             <br />

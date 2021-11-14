@@ -4,9 +4,12 @@ import wallet from '../img/wallet.svg'
 import { Form, Input, Button, Checkbox } from 'antd';
 import { NavLink } from 'react-router-dom'
 import { LockOutlined, EditOutlined } from '@ant-design/icons';
+import { useState } from 'react';
+import axios from 'axios';
+import {useHistory} from 'react-router-dom';
 
 const Login = () => {
-
+    const history=useHistory();
     const onFinish = (values) => {
         console.log('Success:', values);
     };
@@ -14,6 +17,31 @@ const Login = () => {
     const onFinishFailed = (errorInfo) => {
         console.log('Failed:', errorInfo);
     };
+    const [email,setEmail]=useState();
+    const [password,setPassword]=useState();
+
+
+    const handleLogin=async()=>{
+       try {
+        const config={
+            headers:{
+                'content-type':'application/json'
+            }
+        }        
+        const obj={
+            customerEmailId:email,
+            password:password
+        }
+        
+        const resp=await axios.post('https://finance-buddy-api.herokuapp.com/users/login',obj,config);
+        console.log(resp.data);
+        localStorage.setItem('data',resp.data);
+        localStorage.setItem('token',resp.data.token);
+        history.push('/admin');
+       } catch (e) {
+           console.log(e);
+       }
+    }
     return (
         <>
             <div class='row'>
@@ -51,7 +79,7 @@ const Login = () => {
                                 },
                             ]}
                         >
-                            <Input className="input" prefix={<EditOutlined />} />
+                            <Input className="input" prefix={<EditOutlined />} onChange={(e)=>setEmail(e.target.value)}/>
                         </Form.Item>
 
                         <Form.Item
@@ -65,7 +93,7 @@ const Login = () => {
                                 },
                             ]}
                         >
-                            <Input.Password className="input" prefix={<LockOutlined />} />
+                            <Input.Password className="input" onChange={(e)=>setPassword(e.target.value)} prefix={<LockOutlined />} />
                         </Form.Item>
 
                         <Form.Item
@@ -85,11 +113,11 @@ const Login = () => {
                                 span: 16,
                             }}
                         >
-                            <NavLink to='/admin'><Button style={{
+                           <Button style={{
                                 position: "relative", bottom: "50px", backgroundColor: "#5875f5", color: "white"
-                            }} htmlType="submit">
+                            }} htmlType="submit" onClick={handleLogin}>
                                 LOGIN
-                            </Button></NavLink>
+                            </Button>
 
                         </Form.Item>
                         <p className='forgotpassword'>Forgot password? <h6 style={{ color: "#5875f5" }}>Get help</h6></p>
