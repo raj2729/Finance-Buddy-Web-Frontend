@@ -35,8 +35,9 @@ const Login = () => {
         
         const resp=await axios.post('https://finance-buddy-api.herokuapp.com/users/login',obj,config);
         console.log(resp.data);
-        localStorage.setItem('data',resp.data);
-        localStorage.setItem('token',resp.data.token);
+        localStorage.setItem('data',JSON.stringify(resp.data.data));
+        localStorage.setItem('token',JSON.stringify(resp.data.data.token));
+        console.log(localStorage.getItem('token'));
         history.push('/admin');
        } catch (e) {
            console.log(e);

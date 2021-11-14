@@ -11,11 +11,10 @@ function App() {
 
   return (
     <>
-     
         <Navbar />
           <Route exact path="/" component={Login}></Route>
           <Route exact path="/admin" component={Admin}></Route>
-          <Route exact path="/adminprofile" component={AdminProfile}></Route>
+          <Route exact path="/customer/:id" component={AdminProfile}></Route>
           <Route exact path="/agents" component={Agents}></Route>
     </>
   );

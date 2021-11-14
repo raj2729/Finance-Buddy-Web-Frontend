@@ -7,9 +7,25 @@ import { NavLink } from 'react-router-dom'
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { Radio } from 'antd';
+import axios from 'axios';
+
 const Admin = () => {
     const { Search } = Input;
-
+    const [datasrc,setDataSrc]=useState([]);
+    useEffect(()=>{
+        getData()
+    },[]);
+    const getData=async ()=>{
+        try {
+            console.log(localStorage.getItem('token'));
+            const resp=await axios.get('https://finance-buddy-api.herokuapp.com/admin/getAllEMIS',{ headers: {"Authorization" : `Bearer ${JSON.parse(localStorage.getItem('token'))}`} })
+            console.log(resp.data.data);
+            setDataSrc(resp.data.data)
+            console.log(datasrc)
+        } catch (e) {
+            console.log(e);
+        }
+    }
     const suffix = (
         <AudioOutlined
             style={{
@@ -58,17 +74,22 @@ const Admin = () => {
             contactno: 9999111929
         }
     ];
+    
+    const x=datasrc.map(function(val, index){
+        const url=`/customer/${val._id}`
+        return {...val,userName:<NavLink to={url}>{val.userName}</NavLink>};
+    })
 
     const columns = [
         {
             title: 'ID',
-            dataIndex: 'id',
+            dataIndex: '_id',
             key: 'id',
         },
         {
             title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
+            dataIndex: 'userName',
+            key: 'userName',
         },
         {
             title: 'Amount',
@@ -77,13 +98,13 @@ const Admin = () => {
         },
         {
             title: 'Last Date',
-            dataIndex: 'lastdate',
-            key: 'lastdate',
+            dataIndex: 'lastDate',
+            key: 'lastDate',
         },
         {
-            title: 'Contact No.',
-            dataIndex: 'contactno',
-            key: 'contactno',
+            title: 'Agent Name',
+            dataIndex: 'agentName',
+            key: 'agentName',
         },
     ];
     // const state = {
@@ -91,12 +112,12 @@ const Admin = () => {
     // };
 
 
-    // onChange = page => {
-    //     console.log(page);
-    //     this.setState({
-    //         current: page,
-    //     });
-    // };
+    onChange = page => {
+        console.log(page);
+        this.setState({
+            current: page,
+        });
+    };
     return (
         <div style={{ marginLeft: "30px" }}>
             <h1 style={{ color: "#1c03fc" }}>Finance&nbsp;Buddy</h1>
@@ -114,7 +135,8 @@ const Admin = () => {
             </Space>
             <br />
             <br />
-            <Table dataSource={dataSource} columns={columns} />;
+            <Table dataSource={x} columns={columns} />;
+            
             <Pagination defaultCurrent={1} total={50} />
             <br />
 
