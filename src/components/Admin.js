@@ -38,47 +38,11 @@ const Admin = () => {
         console.log(`radio checked:${e.target.value}`);
     }
     const onSearch = value => console.log(value);
-
-
-    const dataSource = [
-        {
-            key: '1',
-            id: '3A7781',
-            name: <NavLink to='/adminprofile'>Ashok Mehta</NavLink>,
-            amount: '15,000',
-            lastdate: '12/10/2021',
-            contactno: 9999111929
-        },
-        {
-            key: '2',
-            id: '3A7781',
-            name: <NavLink to='/adminprofile'>Ashok Mehta</NavLink>,
-            amount: '15,000',
-            lastdate: '12/10/2021',
-            contactno: 9999111929
-        },
-        {
-            key: '3',
-            id: '3A7781',
-            name: <NavLink to='/adminprofile'>Ashok Mehta</NavLink>,
-            amount: '15,000',
-            lastdate: '12/10/2021',
-            contactno: 9999111929
-        },
-        {
-            key: '4',
-            id: '3A7781',
-            name: <NavLink to='/adminprofile'>Ashok Mehta</NavLink>,
-            amount: '15,000',
-            lastdate: '12/10/2021',
-            contactno: 9999111929
-        }
-    ];
     
     const x=datasrc.map(function(val, index){
-        const url=`/customer/${val._id}`
+        const url=`/customer/${val.user}`
         return {...val,userName:<NavLink to={url}>{val.userName}</NavLink>};
-    })
+    });
 
     const columns = [
         {
@@ -136,10 +100,8 @@ const Admin = () => {
             <br />
             <br />
             <Table dataSource={x} columns={columns} />;
-            
             <Pagination defaultCurrent={1} total={50} />
             <br />
-
         </div>
     )
 }
