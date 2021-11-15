@@ -4,7 +4,7 @@ import axios from "axios";
 // import Maps fro./MapViewMap";
 // import MapView from "./MapView";
 
-import profilepic from '../img/profilepic.jpg'
+import profilepic from '../img/profile.png'
 const AdminProfile = (props) => {
     useEffect(()=>{
         getData()
@@ -24,7 +24,7 @@ const AdminProfile = (props) => {
     return (
         <div>
             <div style={{ margin: "auto" }}>
-                <img src={profilepic} alt='profile-pic' style={{ borderRadius: "100%", width: "170px", display: "block", marginLeft: "auto", marginRight: "auto" }} />
+                <img src={profilepic} alt='profile-pic' style={{ borderRadius: "50%", width: "170px", display: "block", marginLeft: "auto", marginRight: "auto" }} />
                 <h1 style={{ textAlign: "center" }}>{obj.name}</h1>
                 <div style={{ backgroundColor: "#accafa" }}><h4 style={{ color: 'red', textAlign: "center", padding: "20px" }}>Collection status : Pending</h4></div>
             </div>
