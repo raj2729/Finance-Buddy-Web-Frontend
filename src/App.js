@@ -11,7 +11,10 @@ function App() {
 
   return (
     <>
-        <Navbar />
+        {/* <Navbar /> */}
+        <div style={{width:'100%',height:"70px",backgroundColor:"#40A9FF"}}>
+
+        </div>
           <Route exact path="/" component={Login}></Route>
           <Route exact path="/admin" component={Admin}></Route>
           <Route exact path="/customer/:id" component={AdminProfile}></Route>

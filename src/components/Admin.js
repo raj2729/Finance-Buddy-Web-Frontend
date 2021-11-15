@@ -100,7 +100,7 @@ const Admin = () => {
             <br />
             <br />
             <Table dataSource={x} columns={columns} />;
-            <Pagination defaultCurrent={1} total={50} />
+            {/* <Pagination defaultCurrent={1} total={50} /> */}
             <br />
         </div>
     )
