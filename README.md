@@ -44,5 +44,5 @@ npm start
 ```
 
 ## Deployment
-The Frontend Web Application is deployed on Heroku: https://finance-buddy-web.herokuapp.com/
-Backend API Endpoints are hosted on Heroku: https://finance-buddy-api.herokuapp.com/
+- The Frontend Web Application is deployed on Heroku: https://finance-buddy-web.herokuapp.com/
+- Backend API Endpoints are hosted on Heroku: https://finance-buddy-api.herokuapp.com/
