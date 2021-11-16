@@ -35,7 +35,7 @@
 
   ```
 
-- The Backend Server is running on port `8080`
+- The Frontend Server is running on port `3000`
 
 ### Usage
 
@@ -45,3 +45,4 @@ npm start
 
 ## Deployment
 The Frontend Web Application is deployed on Heroku: https://finance-buddy-web.herokuapp.com/
+Backend API Endpoints are hosted on Heroku: https://finance-buddy-api.herokuapp.com/
