@@ -8,10 +8,12 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { Radio } from 'antd';
 import axios from 'axios';
+import { Spinner } from 'react-bootstrap';
 
 const Admin = () => {
     const { Search } = Input;
     const [datasrc,setDataSrc]=useState([]);
+    const [loading,setLoading]=useState(true);
     useEffect(()=>{
         getData()
     },[]);
@@ -19,10 +21,10 @@ const Admin = () => {
         try {
             console.log(localStorage.getItem('token'));
             const resp=await axios.get('https://finance-buddy-api.herokuapp.com/admin/getAllEMIS',{ headers: {"Authorization" : `Bearer ${JSON.parse(localStorage.getItem('token'))}`} })
-            console.log(resp.data.data);
+            setLoading(false);
             setDataSrc(resp.data.data)
-            console.log(datasrc)
         } catch (e) {
+            setLoading(false);
             console.log(e);
         }
     }
@@ -83,6 +85,7 @@ const Admin = () => {
         });
     };
     return (
+        loading==true?<center><Spinner animation="border" /></center>:
         <div style={{ marginLeft: "30px" }}>
             <h1 style={{ color: "#1c03fc" }}>Finance&nbsp;Buddy</h1>
 

@@ -1,6 +1,7 @@
 import React, { useState , useEffect} from "react";
 import { render } from "react-dom";
 import axios from "axios";
+import { Spinner } from "react-bootstrap";
 // import Maps fro./MapViewMap";
 // import MapView from "./MapView";
 
@@ -10,18 +11,20 @@ const AdminProfile = (props) => {
         getData()
     },[]);
     const [obj,setObj]=useState({});
+    const [loading,setLoading]=useState(true);
     const getData=async ()=>{
         try {
-            console.log(localStorage.getItem('token'));
-            console.log(props.match.params.id);
             const resp=await axios.get(`https://finance-buddy-api.herokuapp.com/users/getUserDetailsFromAgent/${props.match.params.id}`,{ headers: {"Authorization" : `Bearer ${JSON.parse(localStorage.getItem('token'))}`} })
             setObj(resp.data.data);
+            setLoading(false);
         } catch (e) {
+            setLoading(false);
             console.log(e);
         }
         
     }
     return (
+        loading==true?<center><Spinner animation="border" /></center>:
         <div>
             <div style={{ margin: "auto" }}>
                 <img src={profilepic} alt='profile-pic' style={{ borderRadius: "50%", width: "170px", display: "block", marginLeft: "auto", marginRight: "auto" }} />
